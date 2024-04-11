@@ -134,7 +134,16 @@ export const ThemeContextProvider = ({ children }) => {
                 text: {
                   primary: brown[900],
                   secondary: brown[800]
+                },
+                MuiButton: {
+                  styleOverrides: {
+                    text: {
+                      // primary: shades.primary[50],
+                      primary: "red",
+                    }
+                  }
                 }
+                
               }
             : {
                 // palette values for dark mode

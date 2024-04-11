@@ -19,10 +19,10 @@ function SearchForm() {
   };
   return (
     <>
-    <Stack sx={{position: "absolute", width: "100%", height:"auto", display: "flex", alignItems:"center", top: { xs: "0", md: "150px"}}}>
+    <Stack sx={{position: { xs: "relative", md: "absolute"}, width: "100%", height:"auto", display: "flex", alignItems:"center", top: { xs: "0", md: "280px"}, zIndex:"999"}}>
       <Paper
         component="form"
-        sx={{ p: "4px 4px", display: "flex", alignItems: "center", width: { xs: "100%", md: 590 } }}
+        sx={{ p: "4px 4px", display: "flex", alignItems: "center", width: { xs: "100%", md: 690 } }}
         onSubmit={handleSearchSubmit}
       >
         <InputBase

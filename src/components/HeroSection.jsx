@@ -1,13 +1,15 @@
-import React from 'react'
-import SearchForm from './SearchForm/SearchForm'
-
+import React from "react";
+import SearchForm from "./SearchForm/SearchForm";
+import Stack from "@mui/material/Stack";
 function HeroSection() {
   return (
-    <section className="hero-section">
-        
-        <SearchForm/>
-    </section>
-  )
+    <>
+      <Stack>
+        <SearchForm />
+        <section className="hero-section"></section>
+      </Stack>
+    </>
+  );
 }
 
-export default HeroSection
+export default HeroSection;
