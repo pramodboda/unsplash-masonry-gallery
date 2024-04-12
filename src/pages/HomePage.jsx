@@ -10,7 +10,7 @@ function HomePage() {
     <>
       <NavBar />
       <HeroSection />
-      <Box sx={{mt:4}}>
+      <Box sx={{mt:4, boxShadow:'none'}} >
       <Gallery />
       </Box>
       

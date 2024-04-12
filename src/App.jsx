@@ -17,12 +17,9 @@ function App() {
     <>
       <ThemeContextProvider>
         <GalleryContextProvider>
-          <Paper>
+          <Paper sx={{boxShadow:'none', height:'100%'}}>
             <HomePage />
-           
           </Paper>
-
-       
         </GalleryContextProvider>
       </ThemeContextProvider>
     </>

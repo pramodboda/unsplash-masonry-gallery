@@ -1,6 +1,5 @@
 import React from "react";
 import { useGlobalContext } from "../../context/GalleryContext/GalleryContext";
-
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Stack from "@mui/material/Stack";
@@ -20,9 +19,10 @@ function SearchForm() {
   return (
     <>
     <Stack sx={{position: { xs: "relative", md: "absolute"}, width: "100%", height:"auto", display: "flex", alignItems:"center", top: { xs: "0", md: "280px"}, zIndex:"999"}}>
+
       <Paper
         component="form"
-        sx={{ p: "4px 4px", display: "flex", alignItems: "center", width: { xs: "100%", md: 690 } }}
+        sx={{ p: "4px 4px", display: "flex", alignItems: "center", width: { xs: "100%", md: 690 }, background:{dark:"red", light:"green"}}}
         onSubmit={handleSearchSubmit}
       >
         <InputBase

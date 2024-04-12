@@ -3,27 +3,27 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useGlobalContext } from "../context/GalleryContext/GalleryContext.js";
 
-import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
+import Alert from "@mui/material/Alert";
+import ErrorImg from "./ErrorImg.jsx";
 
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Masonry from "@mui/lab/Masonry";
-import { styled } from "@mui/material/styles";
+import Loader from "./Loader.jsx";
+import WarningImg from "./WarningImg.jsx";
 
 // const url = "https://api.unsplash.com/search/photos?client_id=82gr7blFaP-lOhC_GC0X9JGd4tt_US3cGeTcyvuHjq8";
 
-const Label = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(0.5),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  borderBottomLeftRadius: 0,
-  borderBottomRightRadius: 0,
-}));
+// const Label = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+//   ...theme.typography.body2,
+//   padding: theme.spacing(0.5),
+//   textAlign: "center",
+//   color: theme.palette.text.secondary,
+//   borderBottomLeftRadius: 0,
+//   borderBottomRightRadius: 0,
+// }));
 
 const itemData = [
   {
@@ -112,20 +112,24 @@ function Gallery() {
 
   if (response.isLoading) {
     return (
-      <section>
-        <h4>Loading...</h4>
-      </section>
+      <Stack spacing={2}>
+        {/* <h4>Loading...</h4> */}
+        <Loader />
+      </Stack>
     );
   }
   if (response.isError) {
     return (
-        <Container maxWidth="sm" >
-        <CssBaseline />
+      <Container maxWidth="sm">
         <Stack sx={{ width: "100%" }} spacing={2}>
-          <Alert severity="error">There was an error...</Alert>
-
+          <Box>
+            <ErrorImg className="error-img" />
+          </Box>
+          <Alert variant="filled" severity="error">
+            There was an error...
+          </Alert>
         </Stack>
-        </Container>
+      </Container>
     );
   }
 
@@ -133,14 +137,16 @@ function Gallery() {
 
   if (response.length < 1) {
     return (
-         <Container maxWidth="sm">
-               <CssBaseline />
+      <Container maxWidth="sm">
         <Stack sx={{ width: "100%" }} spacing={2}>
-          <Alert severity="warning">No results found...</Alert>
+          <Box>
+            <WarningImg className="warning-img" />
+          </Box>
+          <Alert variant="filled" severity="warning">
+            No results found...
+          </Alert>
         </Stack>
-         </Container>
-      
-
+      </Container>
     );
   }
   return (
@@ -167,7 +173,7 @@ function Gallery() {
       </Box> */}
 
       <Box sx={{ minHeight: 829 }}>
-        <Masonry columns={{ xs: 2, md: 3}} spacing={2}>
+        <Masonry columns={{ xs: 2, md: 3 }} spacing={2}>
           {results?.map((item, index) => (
             <div key={index}>
               <img
