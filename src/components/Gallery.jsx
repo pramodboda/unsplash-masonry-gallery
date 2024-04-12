@@ -13,7 +13,7 @@ import Masonry from "@mui/lab/Masonry";
 import Loader from "./Loader.jsx";
 import WarningImg from "./WarningImg.jsx";
 
-// const url = "https://api.unsplash.com/search/photos?client_id=82gr7blFaP-lOhC_GC0X9JGd4tt_US3cGeTcyvuHjq8";
+const url = "https://api.unsplash.com/search/photos?client_id=82gr7blFaP-lOhC_GC0X9JGd4tt_US3cGeTcyvuHjq8&per_page=30";
 
 // const Label = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",

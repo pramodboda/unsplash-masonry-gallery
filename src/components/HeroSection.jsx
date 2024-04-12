@@ -11,11 +11,9 @@ function HeroSection() {
         <Typography
             variant="h4"
             component="h4"
-            sx={{ color: "#e2d9cb", textAlign: "center", position:"absolute", zIndex:999, width: "100%", top:"140px" }}
+            sx={{ color: "#e2d9cb", textAlign: "center", position:"absolute", zIndex:999, width: "100%", top:"140px", p:1 }}
           >
-            Masonry Layout
-            <br />
-            Image Gallery
+            Image Gallery<br/>Masonry Layout
           </Typography>
         <section className="hero-section">
 
