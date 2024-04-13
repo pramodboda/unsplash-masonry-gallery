@@ -11,3 +11,5 @@
 - Load more images on scroll or Pagination
 - Lazy loading - https://lazy-images-gallery.netlify.app/
 - Image Gallery with Lightbox - https://www.npmjs.com/package/photoswipe - https://photoswipe.com/react-image-gallery/ - https://photoswipe.com/
+
+https://turbofuture.com/computers/React-Photo-Gallery-List
