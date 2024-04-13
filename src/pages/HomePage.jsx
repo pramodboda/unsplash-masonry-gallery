@@ -11,7 +11,7 @@ function HomePage() {
       <NavBar />
       <HeroSection />
       <Box sx={{mt:4, boxShadow:'none'}} >
-      <Gallery />
+      <Gallery galleryID="my-test-gallery"/>
       </Box>
       
     </>

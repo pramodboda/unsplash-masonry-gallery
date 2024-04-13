@@ -66,16 +66,6 @@ export const ThemeContextProvider = ({ children }) => {
         shape: {
           borderRadius: 0,
         },
-
-        components: {
-          // Name of the component
-          MuiButtonBase: {
-            defaultProps: {
-              // The props to change the default for.
-              disableRipple: true, // No more ripple, on the whole application 💣!
-            },
-          },
-        },
         palette: {
           mode,
           ...(mode === "light"

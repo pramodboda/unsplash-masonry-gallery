@@ -5,7 +5,7 @@ import GalleryContext from "./GalleryContext";
 
 
 function GalleryContextProvider({children}) {
-    const [searchTerm, setSearchTerm] = useState("cat");
+    const [searchTerm, setSearchTerm] = useState("Interiors");
   return (
     <GalleryContext.Provider value={{searchTerm, setSearchTerm}}>
         {children}
