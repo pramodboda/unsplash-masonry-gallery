@@ -13,7 +13,7 @@ import Masonry from "@mui/lab/Masonry";
 import Loader from "./Loader.jsx";
 import WarningImg from "./WarningImg.jsx";
 
-// const url = `https://api.unsplash.com/search/photos?client_id=${import.meta.env.VITE_API_KEY}&per_page=30`;
+const url = `https://api.unsplash.com/search/photos?client_id=${import.meta.env.VITE_API_KEY}&per_page=30`;
 
 const itemData = [
   {
