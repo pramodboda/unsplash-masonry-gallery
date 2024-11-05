@@ -1,6 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useGlobalContext } from "../context/GalleryContext/GalleryContext.js";
@@ -14,8 +12,6 @@ import Box from "@mui/material/Box";
 import Masonry from "@mui/lab/Masonry";
 import Loader from "./Loader.jsx";
 import WarningImg from "./WarningImg.jsx";
-
-import LazyLoad from "react-lazyload";
 
 // If you clone or download this project from git repo, Then you need to create ".env" file in your local project folder.
 // Then you need to set VITE_API_KEY="YOUR UNSPLASH ACCESS Key"
@@ -96,9 +92,6 @@ const itemData = [
 ];
 
 function Gallery() {
-  // const [setNode, entry] = useIntersectionObserver({ threshold: 0.5 });
-  // const isVisible = entry?.isIntersecting;
-
   const { searchTerm } = useGlobalContext();
   // Access the client
   const response = useQuery({
@@ -110,7 +103,7 @@ function Gallery() {
     },
   });
 
-  // console.log(response);
+  console.log(response);
 
   if (response.isLoading) {
     return (
@@ -153,29 +146,42 @@ function Gallery() {
   }
   return (
     <Box className="image-container">
+      {/* <Box sx={{ minHeight: 829 }}>
+        <Masonry columns={3} spacing={2}>
+          {itemData.map((item, index) => (
+            <div key={index}>
+              <img
+                // srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
+                src={`${item.img}?w=162&auto=format`}
+                alt={item.title}
+                loading="lazy"
+                style={{
+                  borderBottomLeftRadius: 4,
+                  borderBottomRightRadius: 4,
+                  display: "block",
+                  width: "100%",
+                }}
+              />
+            </div>
+          ))}
+        </Masonry>
+      </Box> */}
+
       <Box sx={{ minHeight: 829 }}>
         <Masonry columns={{ xs: 2, md: 3 }} spacing={2}>
           {results?.map((item, index) => (
-            <LazyLoad
-              once={item.once}
-              offset={[-50, 0]}
-              throttle={50}
-              debounce={500}
-              height={100}
-              key={index}
-            >
+            <div key={index}>
               <img
-                className="img-item"
                 src={item?.urls?.regular}
                 key={item.id}
                 alt={item.alt_description}
+                loading="lazy"
                 style={{
-                  opacity: "1",
+                  display: "block",
                   width: "100%",
-                  transition: "all 1s ease-in",
                 }}
               />
-            </LazyLoad>
+            </div>
           ))}
         </Masonry>
       </Box>
