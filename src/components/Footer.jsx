@@ -1,5 +1,18 @@
-import React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 export default function Footer() {
-  return <div>Desinged and Developed by Pramod Boda</div>;
+  return (
+    <Box
+      sx={{
+        textAlign: "center",
+        borderTop: "1px solid #776f6d",
+        padding: "10px 0",
+      }}
+    >
+      <Typography variant="subtitle1">
+        Designed and Developed by &copy;Pramod Boda
+      </Typography>
+    </Box>
+  );
 }
