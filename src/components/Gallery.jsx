@@ -1,14 +1,27 @@
+import {useState} from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useGlobalContext } from "../context/GalleryContext/GalleryContext.js";
 
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
-import Alert from "@mui/material/Alert";
-import ErrorImg from "./ErrorImg.jsx";
-
 import Box from "@mui/material/Box";
 import Masonry from "@mui/lab/Masonry";
+import Alert from "@mui/material/Alert";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import Avatar from '@mui/material/Avatar';
+
+
+import ErrorImg from "./ErrorImg.jsx";
+
+
 import Loader from "./Loader.jsx";
 import WarningImg from "./WarningImg.jsx";
 
@@ -93,6 +106,17 @@ const itemData = [
 ];
 
 function Gallery() {
+  const [open, setOpen] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   // const [setNode, entry] = useIntersectionObserver({ threshold: 0.5 });
   // const isVisible = entry?.isIntersecting;
 
@@ -162,6 +186,7 @@ function Gallery() {
               key={index}
             >
               <img
+              onClick={handleClickOpen}
                 className="img-item"
                 src={item?.urls?.regular}
                 key={item.id}
@@ -176,6 +201,56 @@ function Gallery() {
           ))}
         </Masonry>
       </Box>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">
+          
+<Stack
+  direction="row"
+  spacing={2}
+  sx={{
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  }}
+>
+  <div>
+  <Stack
+  direction="row"
+  spacing={2}
+  sx={{
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  }}
+><div>  <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+</div>
+<div>Dan Asaki
+Available for hire</div></Stack>
+
+  </div>
+
+  <div><Button variant="contained" color="success">Download free</Button></div>
+</Stack>
+       
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="text" autoFocus onClick={handleClose}>
+            Disagree
+          </Button>
+          <Button variant="text" onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
