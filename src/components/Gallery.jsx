@@ -1,7 +1,16 @@
-import {useState} from "react";
+import {useState,forwardRef} from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useGlobalContext } from "../context/GalleryContext/GalleryContext.js";
+
+
+
+import ErrorImg from "./ErrorImg.jsx";
+
+import Loader from "./Loader.jsx";
+import WarningImg from "./WarningImg.jsx";
+
+import LazyLoad from "react-lazyload";
 
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
@@ -10,22 +19,30 @@ import Masonry from "@mui/lab/Masonry";
 import Alert from "@mui/material/Alert";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
-import Avatar from '@mui/material/Avatar';
+// import DialogActions from '@mui/material/DialogActions';
+// import DialogContent from '@mui/material/DialogContent';
+// import DialogContentText from '@mui/material/DialogContentText';
+// import DialogTitle from '@mui/material/DialogTitle';
+// import useMediaQuery from '@mui/material/useMediaQuery';
+// import { useTheme } from '@mui/material/styles';
+// import Avatar from '@mui/material/Avatar';
+
+import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
+import Typography from "@mui/material/Typography";
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 
-import ErrorImg from "./ErrorImg.jsx";
-
-
-import Loader from "./Loader.jsx";
-import WarningImg from "./WarningImg.jsx";
-
-import LazyLoad from "react-lazyload";
 
 // If you clone or download this project from git repo, Then you need to create ".env" file in your local project folder.
 // Then you need to set VITE_API_KEY="YOUR UNSPLASH ACCESS Key"
@@ -107,15 +124,17 @@ const itemData = [
 
 function Gallery() {
   const [open, setOpen] = useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const [selectedImg, setSelectedImg] = useState(null);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (imgObj) => {
+    console.log(imgObj)
     setOpen(true);
+    setSelectedImg(imgObj);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setSelectedImg(null);
   };
   // const [setNode, entry] = useIntersectionObserver({ threshold: 0.5 });
   // const isVisible = entry?.isIntersecting;
@@ -179,14 +198,13 @@ function Gallery() {
           {results?.map((item, index) => (
             <LazyLoad
               once={item.once}
-              offset={[-50, 0]}
-              throttle={50}
-              debounce={500}
+              // throttle={50}
+              debounce={600}
               height={100}
               key={index}
             >
               <img
-              onClick={handleClickOpen}
+              onClick={handleClickOpen(item)}
                 className="img-item"
                 src={item?.urls?.regular}
                 key={item.id}
@@ -202,54 +220,31 @@ function Gallery() {
         </Masonry>
       </Box>
       <Dialog
-        fullScreen={fullScreen}
+        fullScreen
         open={open}
         onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        TransitionComponent={Transition}
       >
-        <DialogTitle id="responsive-dialog-title">
-          
-<Stack
-  direction="row"
-  spacing={2}
-  sx={{
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  }}
->
-  <div>
-  <Stack
-  direction="row"
-  spacing={2}
-  sx={{
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-  }}
-><div>  <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-</div>
-<div>Dan Asaki
-Available for hire</div></Stack>
-
-  </div>
-
-  <div><Button variant="contained" color="success">Download free</Button></div>
-</Stack>
-       
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="text" autoFocus onClick={handleClose}>
-            Disagree
-          </Button>
-          <Button variant="text" onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
+        <AppBar sx={{ position: 'relative' }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Sound
+            </Typography>
+            <Button autoFocus color="inherit" onClick={handleClose}>
+              save
+            </Button>
+          </Toolbar>
+        </AppBar>
+        {selectedImg.url.regular}
+{/* <img src={selectedImg.url.regular} alt="" /> */}
       </Dialog>
     </Box>
   );

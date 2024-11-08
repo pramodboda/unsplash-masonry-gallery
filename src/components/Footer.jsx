@@ -10,7 +10,7 @@ export default function Footer() {
         padding: "10px 0",
       }}
     >
-      <Typography variant="subtitle1">
+      <Typography variant="body2">
         Designed and Developed by &copy;Pramod Boda
       </Typography>
     </Box>
