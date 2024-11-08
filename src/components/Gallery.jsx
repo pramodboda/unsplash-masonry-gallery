@@ -125,17 +125,6 @@ const itemData = [
 function Gallery() {
   const [open, setOpen] = useState(false);
   const [selectedImg, setSelectedImg] = useState(null);
-
-  const handleClickOpen = (imgObj) => {
-    console.log(imgObj)
-    setOpen(true);
-    setSelectedImg(imgObj);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedImg(null);
-  };
   // const [setNode, entry] = useIntersectionObserver({ threshold: 0.5 });
   // const isVisible = entry?.isIntersecting;
 
@@ -150,6 +139,8 @@ function Gallery() {
     },
   });
 
+
+  
   // console.log(response);
 
   if (response.isLoading) {
@@ -191,6 +182,21 @@ function Gallery() {
       </Container>
     );
   }
+
+
+
+  const handleClickOpen = (ele) => {
+    // console.log(ele.target);
+    console.log(ele.target.src);
+    console.log(ele.target.alt);
+    setOpen(true);
+    setSelectedImg({"url":ele.target.src, "alt":ele.target.alt});
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedImg(null);
+  };
   return (
     <Box className="image-container">
       <Box sx={{ minHeight: 829 }}>
@@ -204,10 +210,10 @@ function Gallery() {
               key={index}
             >
               <img
-              onClick={handleClickOpen(item)}
+              onClick={handleClickOpen}
                 className="img-item"
                 src={item?.urls?.regular}
-                key={item.id}
+                key={index}
                 alt={item.alt_description}
                 style={{
                   opacity: "1",
@@ -243,8 +249,8 @@ function Gallery() {
             </Button>
           </Toolbar>
         </AppBar>
-        {selectedImg.url.regular}
-{/* <img src={selectedImg.url.regular} alt="" /> */}
+        {selectedImg&& (<img src={selectedImg.url} alt={selectedImg.alt} style={{ width: '100%' }} />)}
+
       </Dialog>
     </Box>
   );
