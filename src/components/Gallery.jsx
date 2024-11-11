@@ -257,7 +257,7 @@ function Gallery() {
             </Button>
             </form>)} */}
             
-            {selectedImg && (<Button href={selectedImg.url} download={`100ideas-${Date.now()}`.png} type="submit" variant="contained" color="success" sx={{mr:"20px"}}>
+            {selectedImg && (<Button href={selectedImg.url} download={`pramodbodaimg-${Date.now()}`} type="submit" variant="contained" color="success" sx={{mr:"20px"}}>
               Download Free
             </Button>)}
 
@@ -275,7 +275,7 @@ function Gallery() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        {selectedImg && (<img src={selectedImg.url} alt={selectedImg.alt} className="download-img" />)}
+        {selectedImg && ( <a href={selectedImg.url} download={`pramodbodaimg-${Date.now()}`} className="download-img"><img src={selectedImg.url} alt={selectedImg.alt} /></a>)}
 
       </Dialog>
     </Box>

@@ -82,7 +82,7 @@ body {
   cursor: pointer;
 }
 
-.download-img{
+.download-img,.download-img img{
   height: 100%;
   width: auto;
   margin: 0 auto;
