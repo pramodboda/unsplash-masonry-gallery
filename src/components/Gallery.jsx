@@ -25,7 +25,7 @@ import Dialog from '@mui/material/Dialog';
 // import DialogTitle from '@mui/material/DialogTitle';
 // import useMediaQuery from '@mui/material/useMediaQuery';
 // import { useTheme } from '@mui/material/styles';
-// import Avatar from '@mui/material/Avatar';
+import Avatar from '@mui/material/Avatar';
 
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -233,23 +233,49 @@ function Gallery() {
       >
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
+            <Box sx={{ ml: 2, flex: 1 }}>
+              <Stack direction="row" spacing={1} sx={{alignItems: "center"}}>
+              <Avatar alt="Cindy Baker" src="https://mighty.tools/mockmind-api/content/human/57.jpg"/>
+              <Box>
+              <Typography  variant="subtitle1" component="div">
+              Pramod Boda
+            </Typography>
+            <Typography  variant="caption" component="div">
+            The road to success and the road to failure are almost exactly the same.
+            </Typography>
+            
+              </Box>
+              </Stack>
+            
+            
+            </Box>
+          
+            {/* Download Button */}
+            {/* {selectedImg.url&&(<form method="get" action={selectedImg.url}>
+              <Button type="submit" variant="contained" color="success" sx={{mr:"20px"}}>
+              Download Free
+            </Button>
+            </form>)} */}
+            
+            {selectedImg && (<Button href={selectedImg.url} download={`100ideas-${Date.now()}`.png} type="submit" variant="contained" color="success" sx={{mr:"20px"}}>
+              Download Free
+            </Button>)}
+
+
+            
+            
+            
             <IconButton
-              edge="start"
+              
               color="inherit"
               onClick={handleClose}
               aria-label="close"
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Sound
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
           </Toolbar>
         </AppBar>
-        {selectedImg&& (<img src={selectedImg.url} alt={selectedImg.alt} style={{ width: '100%' }} />)}
+        {selectedImg && (<img src={selectedImg.url} alt={selectedImg.alt} className="download-img" />)}
 
       </Dialog>
     </Box>

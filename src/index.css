@@ -79,6 +79,13 @@ body {
 
 .img-item {
   opacity: 0;
+  cursor: pointer;
+}
+
+.download-img{
+  height: 100%;
+  width: auto;
+  margin: 0 auto;
 }
 
 @keyframes flipX {
